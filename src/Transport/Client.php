@@ -14,12 +14,14 @@ use Http\Message\MessageFactory\GuzzleMessageFactory;
 use Psr\Http\Message\RequestInterface;
 use Smalot\Cups\CupsException;
 
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\ResponseInterface;
 /**
  * Class Client
  *
  * @package Smalot\Cups\Transport
  */
-class Client implements HttpClient
+class Client implements ClientInterface
 {
 
     const SOCKET_URL = 'unix:///var/run/cups/cups.sock';
@@ -72,16 +74,16 @@ class Client implements HttpClient
         $messageFactory = new GuzzleMessageFactory();
         $socketClient = new SocketHttpClient($messageFactory, $socketClientOptions);
         $host = preg_match(
-          '/unix:\/\//',
-          $socketClientOptions['remote_socket']
+            '/unix:\/\//',
+            $socketClientOptions['remote_socket']
         ) ? 'http://localhost' : $socketClientOptions['remote_socket'];
         $this->httpClient = new PluginClient(
-          $socketClient, [
-            new ErrorPlugin(),
-            new ContentLengthPlugin(),
-            new DecoderPlugin(),
-            new AddHostPlugin(new Uri($host)),
-          ]
+            $socketClient, [
+                new ErrorPlugin(),
+                new ContentLengthPlugin(),
+                new DecoderPlugin(),
+                new AddHostPlugin(new Uri($host)),
+            ]
         );
 
         $this->authType = self::AUTHTYPE_BASIC;
@@ -116,7 +118,7 @@ class Client implements HttpClient
     /**
      * (@inheritdoc}
      */
-    public function sendRequest(RequestInterface $request)
+    public function sendRequest(RequestInterface $request): ResponseInterface
     {
         if ($this->username || $this->password) {
             switch ($this->authType) {

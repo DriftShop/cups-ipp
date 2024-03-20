@@ -160,13 +160,13 @@ class PrinterManager extends ManagerAbstract
         $metaAttributes = $this->buildPrinterRequestedAttributes($attributes);
 
         $content = $this->getVersion() // IPP version 1.1
-          .chr(0x40).chr(0x02) // operation:  cups vendor extension: get printers
-          .$operationId //           request-id
-          .chr(0x01) // start operation-attributes | operation-attributes-tag
-          .$charset
-          .$language
-          .$metaAttributes
-          .chr(0x03);
+            .chr(0x40).chr(0x02) // operation:  cups vendor extension: get printers
+            .$operationId //           request-id
+            .chr(0x01) // start operation-attributes | operation-attributes-tag
+            .$charset
+            .$language
+            .$metaAttributes
+            .chr(0x03);
 
         $headers = ['Content-Type' => 'application/ipp'];
 
@@ -190,15 +190,15 @@ class PrinterManager extends ManagerAbstract
         $printerAttributes = '';//$this->buildPrinterAttributes();
 
         $content = $this->getVersion() // 1.1  | version-number
-          .chr(0x00).chr(0x0b) // Print-URI | operation-id
-          .$operationId //           request-id
-          .chr(0x01) // start operation-attributes | operation-attributes-tag
-          .$charset
-          .$language
-          .$username
-          .$printerUri
-          .$printerAttributes
-          .chr(0x03); // end-of-attributes | end-of-attributes-tag
+            .chr(0x00).chr(0x0b) // Print-URI | operation-id
+            .$operationId //           request-id
+            .chr(0x01) // start operation-attributes | operation-attributes-tag
+            .$charset
+            .$language
+            .$username
+            .$printerUri
+            .$printerAttributes
+            .chr(0x03); // end-of-attributes | end-of-attributes-tag
 
         $headers = ['Content-Type' => 'application/ipp'];
 
@@ -219,13 +219,13 @@ class PrinterManager extends ManagerAbstract
         $metaAttributes = $this->buildPrinterRequestedAttributes($attributes);
 
         $content = $this->getVersion() // IPP version 1.1
-          .chr(0x40).chr(0x01) // operation:  cups vendor extension: get default printer
-          .$operationId //           request-id
-          .chr(0x01) // start operation-attributes | operation-attributes-tag
-          .$charset
-          .$language
-          .$metaAttributes
-          .chr(0x03);
+            .chr(0x40).chr(0x01) // operation:  cups vendor extension: get default printer
+            .$operationId //           request-id
+            .chr(0x01) // start operation-attributes | operation-attributes-tag
+            .$charset
+            .$language
+            .$metaAttributes
+            .chr(0x03);
 
         $headers = ['Content-Type' => 'application/ipp'];
 
@@ -247,14 +247,14 @@ class PrinterManager extends ManagerAbstract
         $printerUri = $this->buildProperty('printer-uri', $printer->getUri());
 
         $content = $this->getVersion() // 1.1  | version-number
-          .chr(0x00).chr(0x10) // Pause-Printer | operation-id
-          .$operationId //           request-id
-          .chr(0x01) // start operation-attributes | operation-attributes-tag
-          .$charset
-          .$language
-          .$username
-          .$printerUri
-          .chr(0x03); // end-of-attributes | end-of-attributes-tag
+            .chr(0x00).chr(0x10) // Pause-Printer | operation-id
+            .$operationId //           request-id
+            .chr(0x01) // start operation-attributes | operation-attributes-tag
+            .$charset
+            .$language
+            .$username
+            .$printerUri
+            .chr(0x03); // end-of-attributes | end-of-attributes-tag
 
         $headers = ['Content-Type' => 'application/ipp'];
 
@@ -276,14 +276,14 @@ class PrinterManager extends ManagerAbstract
         $printerUri = $this->buildProperty('printer-uri', $printer->getUri());
 
         $content = $this->getVersion() // 1.1  | version-number
-          .chr(0x00).chr(0x11) // Resume-Printer | operation-id
-          .$operationId //           request-id
-          .chr(0x01) // start operation-attributes | operation-attributes-tag
-          .$charset
-          .$language
-          .$username
-          .$printerUri
-          .chr(0x03); // end-of-attributes | end-of-attributes-tag
+            .chr(0x00).chr(0x11) // Resume-Printer | operation-id
+            .$operationId //           request-id
+            .chr(0x01) // start operation-attributes | operation-attributes-tag
+            .$charset
+            .$language
+            .$username
+            .$printerUri
+            .chr(0x03); // end-of-attributes | end-of-attributes-tag
 
         $headers = ['Content-Type' => 'application/ipp'];
 
@@ -306,15 +306,15 @@ class PrinterManager extends ManagerAbstract
         $purgeJob = $this->buildProperty('purge-jobs', 1);
 
         $content = $this->getVersion() // 1.1  | version-number
-          .chr(0x00).chr(0x12) // purge-Jobs | operation-id
-          .$operationId //           request-id
-          .chr(0x01) // start operation-attributes | operation-attributes-tag
-          .$charset
-          .$language
-          .$username
-          .$printerUri
-          .$purgeJob
-          .chr(0x03); // end-of-attributes | end-of-attributes-tag
+            .chr(0x00).chr(0x12) // purge-Jobs | operation-id
+            .$operationId //           request-id
+            .chr(0x01) // start operation-attributes | operation-attributes-tag
+            .$charset
+            .$language
+            .$username
+            .$printerUri
+            .$purgeJob
+            .chr(0x03); // end-of-attributes | end-of-attributes-tag
 
         $headers = ['Content-Type' => 'application/ipp'];
 
@@ -332,13 +332,13 @@ class PrinterManager extends ManagerAbstract
     {
         if (empty($attributes)) {
             $attributes = [
-              'printer-uri-supported',
-              'printer-name',
-              'printer-state',
-              'printer-location',
-              'printer-info',
-              'printer-type',
-              'printer-icons',
+                'printer-uri-supported',
+                'printer-name',
+                'printer-state',
+                'printer-location',
+                'printer-info',
+                'printer-type',
+                'printer-icons',
             ];
         }
 
@@ -347,15 +347,15 @@ class PrinterManager extends ManagerAbstract
         for ($i = 0; $i < count($attributes); $i++) {
             if ($i == 0) {
                 $metaAttributes .= chr(0x44) // Keyword
-                  .$this->builder->formatStringLength('requested-attributes')
-                  .'requested-attributes'
-                  .$this->builder->formatStringLength($attributes[0])
-                  .$attributes[0];
+                    .$this->builder->formatStringLength('requested-attributes')
+                    .'requested-attributes'
+                    .$this->builder->formatStringLength($attributes[0])
+                    .$attributes[0];
             } else {
                 $metaAttributes .= chr(0x44) // Keyword
-                  .chr(0x0).chr(0x0) // zero-length name
-                  .$this->builder->formatStringLength($attributes[$i])
-                  .$attributes[$i];
+                    .chr(0x0).chr(0x0) // zero-length name
+                    .$this->builder->formatStringLength($attributes[$i])
+                    .$attributes[$i];
             }
         }
 
